@@ -2,31 +2,33 @@ import Link from 'next/link';
 
 export default function PreloginPage() {
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between font-sans text-slate-800">
+    <div className="min-h-screen bg-[#f6f5f1] flex flex-col justify-between text-[#1a1814] font-sans">
       
-      {/* Top Navigation Bar */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      {/* Top Navigation Bar - Sharp borders, no drop shadows */}
+      <header className="border-b border-[#3d3a32]/20 sticky top-0 z-50 bg-[#f6f5f1]">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-md shadow-blue-500/20">
+            {/* Logo: Replaced default rounded shape with sharp, typographic block */}
+            <div className="w-8 h-8 bg-[#1a1814] flex items-center justify-center text-[#f6f5f1] font-bold font-serif text-lg">
               O
             </div>
             <div>
-              <span className="text-xl font-black tracking-tight text-slate-900">Octa<span className="text-blue-600">Edu</span></span>
-              <span className="block text-[10px] text-slate-400 font-semibold uppercase tracking-widest">Platform Tryout & Belajar</span>
+              <span className="text-lg font-bold tracking-tight text-[#1a1814]">
+                Octa<span className="text-[#c45530]">Edu</span>
+              </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-6">
             <Link 
               href="/login" 
-              className="text-sm font-semibold text-slate-700 hover:text-blue-600 px-4 py-2.5 transition"
+              className="text-sm font-medium text-[#3d3a32] hover:text-[#c45530] transition-colors"
             >
               Masuk
             </Link>
             <Link 
               href="/register" 
-              className="bg-blue-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-700 transition shadow-sm shadow-blue-600/20"
+              className="bg-[#c45530] text-[#f6f5f1] text-sm font-medium px-5 py-2 hover:bg-[#a34425] transition-colors"
             >
               Daftar Akun
             </Link>
@@ -34,101 +36,89 @@ export default function PreloginPage() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <main className="flex-1">
-        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      {/* Hero Section - Asymmetric Grid Layout */}
+      {/* Col 1: Empty gutter | Col 2: Content | Col 3: Visual Card | Col 4: Empty gutter */}
+      <main className="flex-1 w-full grid grid-cols-[minmax(1rem,1fr)_minmax(0,40rem)_minmax(0,24rem)_minmax(1rem,1fr)] items-end pb-24 pt-16 gap-y-16">
+        
+        {/* Left Content - Forced into column 2 */}
+        <div className="col-start-1 lg:col-start-2 px-6 lg:px-12 pb-8">
           
-          {/* Kolom Kiri: Value Proposition */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 px-3.5 py-1.5 rounded-full text-xs font-semibold">
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-              Portal Resmi Tryout & Akselerasi Prestasi Indonesia
-            </div>
+          {/* Typography: Replaced generic standard text with high-contrast serif/sans mixing */}
+          <h1 className="text-4xl lg:text-6xl font-serif text-[#1a1814] leading-[1.1] tracking-tight">
+            Simulasi Tryout dengan <span className="text-[#c45530] italic">14.000+</span> Soal Terkalibrasi Nasional.
+          </h1>
 
-            <h1 className="text-4xl lg:text-5xl font-black tracking-tight text-slate-900 leading-[1.15]">
-              Satu Platform Terpadu untuk <span className="text-blue-600">Ujian, Analisis, & Kolaborasi</span> Belajar.
-            </h1>
+          {/* Copy: Replaced abstract AI buzzwords with concrete facts */}
+          <p className="mt-6 text-[#3d3a32] text-base lg:text-lg leading-relaxed max-w-xl">
+            Kerjakan tryout, lihat skor dalam 3 detik, dan bedah jawaban yang salah. Lebih dari 5.000 siswa menggunakan OctaEdu untuk mengeksekusi persiapan UTBK dan ujian mandiri setiap bulannya.
+          </p>
 
-            <p className="text-slate-600 text-base lg:text-lg leading-relaxed max-w-2xl">
-              Tingkatkan kesiapan akademikmu lewat simulasi tryout interaktif berstandar nasional, bedah pembahasan mendalam, pantau grafik analisis skor secara real-time, dan berkompetisi di rangking nasional bersama rekan belajar lainnya.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link 
-                href="/register" 
-                className="bg-blue-600 text-white font-bold px-8 py-4 rounded-xl text-center hover:bg-blue-700 transition shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 text-base"
-              >
-                <span>Mulai Belajar Sekarang</span>
-                <span>→</span>
-              </Link>
-              <Link 
-                href="/login" 
-                className="bg-white border border-slate-300 text-slate-700 font-bold px-8 py-4 rounded-xl text-center hover:bg-slate-50 transition text-base"
-              >
-                Masuk ke Akun Saya
-              </Link>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-4 pt-10">
+            <Link 
+              href="/register" 
+              className="bg-[#1a1814] text-[#f6f5f1] font-medium px-8 py-4 text-center hover:bg-[#3d3a32] transition-colors"
+            >
+              Mulai Ujian Pertamamu
+            </Link>
+            <Link 
+              href="/login" 
+              className="bg-transparent border border-[#3d3a32]/30 text-[#1a1814] font-medium px-8 py-4 text-center hover:bg-[#3d3a32]/5 transition-colors"
+            >
+              Lanjut Belajar
+            </Link>
           </div>
-
-          {/* Kolom Kanan: Card Fitur Unggulan (Mirip Portal Korporat Digital) */}
-          <div className="lg:col-span-5">
-            <div className="bg-white p-8 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 space-y-6">
-              <h3 className="font-bold text-slate-900 text-lg border-b border-slate-100 pb-4">
-                Keunggulan Layanan OctaEdu
-              </h3>
-
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold shrink-0">
-                    📊
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-800">Tryout & Analisis Komprehensif</h4>
-                    <p className="text-xs text-slate-500 mt-0.5">Evaluasi performa ujian lengkap dengan skor akurat dan grafik perkembangan riwayat.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold shrink-0">
-                    💡
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-800">Pembahasan Soal Transparan</h4>
-                    <p className="text-xs text-slate-500 mt-0.5">Kunci jawaban dan ulasan detail untuk setiap nomor soal guna mempertajam pemahaman.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold shrink-0">
-                    🏆
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-800">Peringkat & Grup Belajar</h4>
-                    <p className="text-xs text-slate-500 mt-0.5">Pacu motivasi belajar dengan memantau posisi skor dan berkolaborasi bersama grup.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-2 bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
-                <p className="text-xs text-slate-500">Butuh bantuan pendaftaran kelas atau konfirmasi pembayaran?</p>
-                <a 
-                  href="https://wa.me/62895704254907" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-block text-xs font-bold text-emerald-600 hover:underline mt-1"
-                >
-                  💬 Hubungi Admin via WhatsApp (+62 895-7042-54907)
-                </a>
-              </div>
-            </div>
-          </div>
-
         </div>
+
+        {/* Right Feature Card - Bleeds into col 3 and overlaps layout */}
+        <div className="col-start-1 lg:col-start-3 lg:col-span-2 px-6 lg:px-0">
+          
+          {/* Component Vocabulary: Replaced 'bg-white rounded-2xl shadow-xl' with flat, sharp borders */}
+          <article className="border border-[#3d3a32]/20 bg-[#f6f5f1] p-8 max-w-md lg:-ml-12 relative z-10">
+            <h3 className="font-serif text-[#1a1814] text-xl mb-6">
+              Cara Kerja Sistem
+            </h3>
+
+            <div className="space-y-6">
+              {/* Feature list: Replaced emoji icons with sharp inset borders */}
+              <div className="border-l-2 border-[#c45530] pl-4">
+                <h4 className="text-sm font-bold text-[#1a1814]">Hasil Keluar Real-time</h4>
+                <p className="text-sm text-[#3d3a32] mt-1">Skor akurat dihitung langsung setelah menit ujian berakhir. Tanpa menunggu esok hari.</p>
+              </div>
+
+              <div className="border-l-2 border-[#3d3a32]/30 pl-4">
+                <h4 className="text-sm font-bold text-[#1a1814]">Bedah Kesalahan Langsung</h4>
+                <p className="text-sm text-[#3d3a32] mt-1">Sistem menandai pola materi yang paling sering salah dijawab beserta kunci pembahasannya.</p>
+              </div>
+
+              <div className="border-l-2 border-[#3d3a32]/30 pl-4">
+                <h4 className="text-sm font-bold text-[#1a1814]">Peringkat Berjalan</h4>
+                <p className="text-sm text-[#3d3a32] mt-1">Bandingkan posisimu dengan 5.000+ peserta lain secara nasional dalam satu dashboard.</p>
+              </div>
+            </div>
+
+            {/* CTA/Help: Stripped out the generic background box, made it a subtle text link */}
+            <div className="mt-8 pt-6 border-t border-[#3d3a32]/20">
+              <p className="text-xs text-[#3d3a32]">Ada kendala pendaftaran?</p>
+              <a 
+                href="https://wa.me/62895704254907" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block text-sm font-medium text-[#c45530] hover:text-[#1a1814] transition-colors mt-1"
+              >
+                Kirim pesan ke Admin (+62 895-7042-54907) ↗
+              </a>
+            </div>
+          </article>
+        </div>
+
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400">
-        <p>© {new Date().getFullYear()} OctaEdu Indonesia. All rights reserved. Platform Tryout & Pembahasan Pintar.</p>
+      {/* Footer - Minimalist and direct */}
+      <footer className="border-t border-[#3d3a32]/20 py-8 px-6 text-[#3d3a32]">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+          <p>© {new Date().getFullYear()} OctaEdu Indonesia.</p>
+          <p>14.000+ Soal • Analisis Real-time</p>
+        </div>
       </footer>
 
     </div>

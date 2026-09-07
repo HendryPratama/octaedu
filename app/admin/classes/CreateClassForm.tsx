@@ -11,46 +11,57 @@ export default function CreateClassForm() {
   const [state, formAction, isPending] = useActionState(createClass, initialState);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-      <h2 className="text-lg font-semibold text-slate-800 mb-4">Buat Kelas Baru</h2>
-
-      <form action={formAction} className="flex flex-col gap-4">
+    // Removed the generic card background (bg-white shadow-sm rounded-xl). 
+    // The form now integrates directly into the parent's structural layout.
+    <div className="space-y-5">
+      <form action={formAction} className="flex flex-col gap-6">
         
+        {/* Error Alert: Replaced default red box with Ember inset */}
         {state?.error && (
-          <div className="bg-red-50 border-l-4 border-red-500 p-3 rounded text-xs text-red-700">
-            {state.error}
+          <div className="border-l-2 border-[#c45530] bg-[#c45530]/5 p-3">
+            <p className="text-xs font-bold text-[#c45530] uppercase tracking-wide">{state.error}</p>
           </div>
         )}
 
+        {/* Success Alert: Replaced default green box with Ink inset */}
         {state?.success && (
-          <div className="bg-green-50 border-l-4 border-green-500 p-3 rounded text-xs text-green-700">
-            {state.success}
+          <div className="border-l-2 border-[#1a1814] bg-[#3d3a32]/5 p-3">
+            <p className="text-xs font-bold text-[#1a1814] uppercase tracking-wide">{state.success}</p>
           </div>
         )}
 
-        <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-slate-600">Nama Kelas / Ujian</label>
+        {/* Input Group 1 */}
+        <div className="flex flex-col gap-2">
+          <label className="text-[10px] font-bold uppercase tracking-widest text-[#3d3a32]">
+            Nomenklatur Kelas
+          </label>
           <input
-            className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-900"
+            className="px-4 py-3 bg-transparent border border-[#3d3a32]/30 rounded-none text-sm text-[#1a1814] focus:outline-none focus:border-[#1a1814] transition-colors placeholder:text-[#3d3a32]/40"
             name="name"
-            placeholder="Contoh: Tryout UTBK 2026"
+            placeholder="e.g., Tryout SNBT Gelombang 1"
             required
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-slate-600">Deskripsi Singkat</label>
+        {/* Input Group 2 */}
+        <div className="flex flex-col gap-2">
+          <label className="text-[10px] font-bold uppercase tracking-widest text-[#3d3a32]">
+            Spesifikasi / Deskripsi
+          </label>
           <textarea
-            className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-900 resize-none h-20"
+            className="px-4 py-3 bg-transparent border border-[#3d3a32]/30 rounded-none text-sm text-[#1a1814] focus:outline-none focus:border-[#1a1814] transition-colors placeholder:text-[#3d3a32]/40 resize-none h-24"
             name="description"
-            placeholder="Penjelasan materi ujian..."
+            placeholder="Rincian cakupan materi ujian..."
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-slate-600">Harga Akses (Rp)</label>
+        {/* Input Group 3 */}
+        <div className="flex flex-col gap-2">
+          <label className="text-[10px] font-bold uppercase tracking-widest text-[#3d3a32]">
+            Tarif Dasar (IDR)
+          </label>
           <input
-            className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-900"
+            className="px-4 py-3 bg-transparent border border-[#3d3a32]/30 rounded-none text-sm text-[#1a1814] font-serif focus:outline-none focus:border-[#1a1814] transition-colors"
             type="number"
             name="price"
             defaultValue={0}
@@ -59,11 +70,12 @@ export default function CreateClassForm() {
           />
         </div>
 
+        {/* Submit Action: Heavy, sharp block button */}
         <button
           disabled={isPending}
-          className="mt-2 w-full bg-blue-600 py-2.5 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition disabled:bg-blue-300"
+          className="mt-4 w-full bg-[#1a1814] py-4 text-[#f6f5f1] text-xs font-bold uppercase tracking-widest rounded-none hover:bg-[#3d3a32] transition-colors disabled:bg-[#3d3a32]/50 disabled:cursor-not-allowed"
         >
-          {isPending ? 'Menyimpan...' : 'Simpan Kelas'}
+          {isPending ? 'Menulis Data...' : 'Registrasi Kelas Baru'}
         </button>
       </form>
     </div>

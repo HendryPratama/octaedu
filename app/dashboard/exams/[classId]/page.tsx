@@ -29,7 +29,7 @@ export default async function ExamPage({
     .single();
 
   if (!enrollment || enrollment.status !== 'active') {
-    redirect('/dashboard'); // Jika belum aktif, tendang kembali ke dashboard
+    redirect('/dashboard'); 
   }
 
   // 2. Ambil detail kelas
@@ -63,58 +63,76 @@ export default async function ExamPage({
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 p-8">
-      <div className="max-w-3xl mx-auto">
+    <main className="min-h-screen bg-[#f6f5f1] font-sans text-[#1a1814] pb-24">
+      <div className="max-w-4xl mx-auto px-6 lg:px-12">
         
-        {/* Header Ujian */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 mb-6 flex justify-between items-center">
+        {/* Header Ujian: Heavy structural line, stark typography */}
+        <header className="pt-12 pb-8 mb-12 border-b-2 border-[#1a1814] flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <Link href="/dashboard" className="text-xs font-semibold text-blue-600 hover:underline">
-              ← Kembali ke Dashboard
-            </Link>
-            <h1 className="text-xl font-bold text-slate-800 mt-1">
-              Ujian: {currentClass?.name}
+            <div className="mb-4">
+              <Link 
+                href="/dashboard" 
+                className="text-[10px] font-bold uppercase tracking-widest text-[#3d3a32] hover:text-[#c45530] transition-colors border-b border-transparent hover:border-[#c45530] pb-0.5"
+              >
+                Kembali ke Portal
+              </Link>
+            </div>
+            <h1 className="text-3xl lg:text-4xl font-serif text-[#1a1814] tracking-tight">
+              {currentClass?.name}
             </h1>
           </div>
-          <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">
-            {questions?.length || 0} Soal
-          </span>
-        </div>
+          
+          {/* Replaced soft blue pill badge with a sharp outlined metrics box */}
+          <div className="border border-[#3d3a32]/30 px-4 py-2 flex items-center justify-center">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#3d3a32]">
+              Total: <span className="text-[#1a1814]">{questions?.length || 0} Soal</span>
+            </span>
+          </div>
+        </header>
 
-        {/* KONDISI 1: Jika sudah pernah ujian (dan tidak sedang retake), tampilkan ringkasan & tombol review */}
+        {/* KONDISI 1: Jika sudah pernah ujian (dan tidak sedang retake) */}
         {pastResult ? (
-          <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 text-center">
-            <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-              {pastResult.score}
-            </div>
-            <h2 className="text-xl font-semibold text-slate-800">Ujian Telah Diselesaikan</h2>
-            <p className="text-slate-500 mt-2 text-sm">
-              Skor Akhir Anda: <span className="font-bold text-slate-800 text-lg">{pastResult.score}</span> / 100
+          <section className="border border-[#1a1814] p-10 flex flex-col items-center justify-center text-center bg-transparent mt-8">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-[#3d3a32] mb-6">
+              Status: Ujian Selesai
             </p>
+            
+            {/* Replaced generic circular badge with massive serif typography */}
+            <div className="mb-6 flex flex-col items-center">
+              <span className="text-[10px] uppercase font-bold text-[#3d3a32] tracking-widest mb-1">Nilai Akhir</span>
+              <div className="text-7xl lg:text-8xl font-serif font-bold text-[#1a1814] leading-none">
+                {pastResult.score}
+              </div>
+            </div>
 
-            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
               <Link 
                 href={`/dashboard/exams/${classId}/review`} 
-                className="bg-slate-100 text-slate-700 px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-slate-200 transition"
+                className="inline-block border border-[#1a1814] text-[#1a1814] px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#1a1814] hover:text-[#f6f5f1] transition-colors text-center"
               >
-                🔍 Lihat Pembahasan Soal
+                Akses Analisis & Pembahasan
               </Link>
               
               <Link 
                 href="/dashboard" 
-                className="bg-slate-900 text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-slate-800 transition"
+                className="inline-block bg-[#1a1814] text-[#f6f5f1] px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#3d3a32] transition-colors text-center border border-[#1a1814]"
               >
-                ← Kembali ke Dashboard
+                Tutup Sesi
               </Link>
             </div>
-          </div>
+          </section>
         ) : questions?.length === 0 ? (
-          <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 text-center text-slate-500 text-sm">
-            Belum ada soal yang diunggah untuk ujian ini oleh admin.
+          // Empty State: Replaced gray dashed box with a stark inset warning
+          <div className="border-l-2 border-[#c45530] bg-[#c45530]/5 p-6 mt-8">
+            <p className="text-[#c45530] text-sm font-bold uppercase tracking-wide">
+              Peringatan Sistem: Bank soal untuk kelas ini belum dikonfigurasi.
+            </p>
           </div>
         ) : (
-          // KONDISI 2: Jika belum pernah ujian atau sedang melakukan tes ulang (retake)
-          <ExamClientForm classId={classId} questions={(questions || []) as any[]} />
+          // KONDISI 2: Ujian berlangsung
+          <section className="mt-8">
+            <ExamClientForm classId={classId} questions={(questions || []) as any[]} />
+          </section>
         )}
 
       </div>
