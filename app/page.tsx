@@ -1,69 +1,136 @@
-import Image from "next/image";
+import Link from 'next/link';
 
-export default function Home() {
+export default function PreloginPage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-between font-sans text-slate-800">
+      
+      {/* Top Navigation Bar */}
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-md shadow-blue-500/20">
+              O
+            </div>
+            <div>
+              <span className="text-xl font-black tracking-tight text-slate-900">Octa<span className="text-blue-600">Edu</span></span>
+              <span className="block text-[10px] text-slate-400 font-semibold uppercase tracking-widest">Platform Tryout & Belajar</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Link 
+              href="/login" 
+              className="text-sm font-semibold text-slate-700 hover:text-blue-600 px-4 py-2.5 transition"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Masuk
+            </Link>
+            <Link 
+              href="/register" 
+              className="bg-blue-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-700 transition shadow-sm shadow-blue-600/20"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              Daftar Akun
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header>
+
+      {/* Hero Section */}
+      <main className="flex-1">
+        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Kolom Kiri: Value Proposition */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 px-3.5 py-1.5 rounded-full text-xs font-semibold">
+              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+              Portal Resmi Tryout & Akselerasi Prestasi Indonesia
+            </div>
+
+            <h1 className="text-4xl lg:text-5xl font-black tracking-tight text-slate-900 leading-[1.15]">
+              Satu Platform Terpadu untuk <span className="text-blue-600">Ujian, Analisis, & Kolaborasi</span> Belajar.
+            </h1>
+
+            <p className="text-slate-600 text-base lg:text-lg leading-relaxed max-w-2xl">
+              Tingkatkan kesiapan akademikmu lewat simulasi tryout interaktif berstandar nasional, bedah pembahasan mendalam, pantau grafik analisis skor secara real-time, dan berkompetisi di rangking nasional bersama rekan belajar lainnya.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Link 
+                href="/register" 
+                className="bg-blue-600 text-white font-bold px-8 py-4 rounded-xl text-center hover:bg-blue-700 transition shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 text-base"
+              >
+                <span>Mulai Belajar Sekarang</span>
+                <span>→</span>
+              </Link>
+              <Link 
+                href="/login" 
+                className="bg-white border border-slate-300 text-slate-700 font-bold px-8 py-4 rounded-xl text-center hover:bg-slate-50 transition text-base"
+              >
+                Masuk ke Akun Saya
+              </Link>
+            </div>
+          </div>
+
+          {/* Kolom Kanan: Card Fitur Unggulan (Mirip Portal Korporat Digital) */}
+          <div className="lg:col-span-5">
+            <div className="bg-white p-8 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 space-y-6">
+              <h3 className="font-bold text-slate-900 text-lg border-b border-slate-100 pb-4">
+                Keunggulan Layanan OctaEdu
+              </h3>
+
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold shrink-0">
+                    📊
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-800">Tryout & Analisis Komprehensif</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">Evaluasi performa ujian lengkap dengan skor akurat dan grafik perkembangan riwayat.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold shrink-0">
+                    💡
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-800">Pembahasan Soal Transparan</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">Kunci jawaban dan ulasan detail untuk setiap nomor soal guna mempertajam pemahaman.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold shrink-0">
+                    🏆
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-800">Peringkat & Grup Belajar</h4>
+                    <p className="text-xs text-slate-500 mt-0.5">Pacu motivasi belajar dengan memantau posisi skor dan berkolaborasi bersama grup.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2 bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
+                <p className="text-xs text-slate-500">Butuh bantuan pendaftaran kelas atau konfirmasi pembayaran?</p>
+                <a 
+                  href="https://wa.me/62895704254907" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block text-xs font-bold text-emerald-600 hover:underline mt-1"
+                >
+                  💬 Hubungi Admin via WhatsApp (+62 895-7042-54907)
+                </a>
+              </div>
+            </div>
+          </div>
+
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400">
+        <p>© {new Date().getFullYear()} OctaEdu Indonesia. All rights reserved. Platform Tryout & Pembahasan Pintar.</p>
+      </footer>
+
     </div>
   );
 }

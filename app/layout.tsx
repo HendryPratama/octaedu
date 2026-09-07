@@ -19,11 +19,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="id">
+      {/* Cukup letakkan class bg dan text di sini, tidak perlu di globals.css */}
+     <body className="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen">
+        {children}
+      </body>
     </html>
   );
 }
