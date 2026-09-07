@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import CreateQuestionForm from './CreateQuestionForm';
 import DeleteQuestionButton from './DeleteQuestionButton';
+import BulkUploadModal from './BulkUploadModal';
 
 export default async function AdminQuestionsPage({
   params,
@@ -59,9 +60,14 @@ export default async function AdminQuestionsPage({
 
         {/* Grid layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
           
           {/* Kolom Kiri: Form Tambah Soal */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 space-y-4">
+            {/* 2. Tambahkan Modal Bulk Upload */}
+            <BulkUploadModal classId={classId} />
+            
+            {/* Form Manual Input */}
             <CreateQuestionForm classId={classId} />
           </div>
 

@@ -254,3 +254,55 @@ export async function retakeExam(classId: string) {
   revalidatePath(`/dashboard/exams/${classId}`)
   return { success: true }
 }
+
+export async function bulkUploadQuestions(
+  classId: string,
+  questionsData: Array<{
+    question_text: string;
+    options: Record<string, string>;
+    correct_answer: string;
+  }>
+) {
+  try {
+    const supabase = await createClient();
+
+    // 1. Validasi Autentikasi Admin
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return { error: 'Sesi berakhir, silakan login kembali.' };
+
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+
+    if (profile?.role !== 'admin') {
+      return { error: 'Akses ditolak. Hanya admin yang diperbolehkan.' };
+    }
+
+    if (!questionsData || questionsData.length === 0) {
+      return { error: 'Tidak ada data soal yang valid untuk diunggah.' };
+    }
+
+    // 2. Format data sesuai skema tabel questions
+    const rowsToInsert = questionsData.map((q) => ({
+      class_id: classId,
+      question_text: q.question_text,
+      options: q.options,
+      correct_answer: q.correct_answer,
+    }));
+
+    // 3. Batch Insert ke Supabase
+    const { error } = await supabase.from('questions').insert(rowsToInsert);
+
+    if (error) {
+      console.error('Bulk Insert Error:', error);
+      return { error: 'Gagal menyimpan soal ke database: ' + error.message };
+    }
+
+    revalidatePath(`/admin/classes/${classId}/questions`);
+    return { success: `Berhasil mengunggah ${questionsData.length} soal baru!` };
+  } catch (err: any) {
+    return { error: err?.message || 'Terjadi kesalahan sistem.' };
+  }
+}
