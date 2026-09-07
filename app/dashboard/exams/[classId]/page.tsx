@@ -111,7 +111,7 @@ export default async function ExamPage({
           </div>
         ) : (
           // KONDISI 2: Jika belum pernah ujian atau sedang melakukan tes ulang (retake)
-          <ExamClientForm classId={classId} questions={questions || []} />
+          <ExamClientForm classId={classId} questions={(questions || []) as any[]} />
         )}
 
       </div>
