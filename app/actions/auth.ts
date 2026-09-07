@@ -5,23 +5,34 @@ import { createClient } from '@/utils/supabase/server'
 
 // Fungsi untuk proses Login
 export async function login(prevState: any, formData: FormData) {
-  const supabase = await createClient()
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
 
-  const email = formData.get('email') as string
-  const password = formData.get('password') as string
+  const supabase = await createClient();
 
-  const { error } = await supabase.auth.signInWithPassword({
+  // 1. Proses login via Supabase Auth
+  const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
     email,
     password,
-  })
+  });
 
-  if (error) {
-    // Jika gagal login, lempar error ke UI form
-    return { error: error.message }
+  if (authError || !authData.user) {
+    return { error: 'Email atau password salah.' };
   }
 
-  // Jika berhasil, arahkan ke dashboard
-  redirect('/dashboard')
+  // 2. Ambil data role pengguna dari tabel profiles
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', authData.user.id)
+    .single();
+
+  // 3. Redirect berdasarkan Role
+  if (profile && profile.role === 'admin') {
+    redirect('/admin/classes');
+  } else {
+    redirect('/dashboard');
+  }
 }
 
 // Fungsi untuk proses Registrasi
