@@ -3,8 +3,8 @@ import { useActionState } from 'react';
 import { createClass } from '@/app/actions/admin';
 
 const initialState = {
-  error: null as string | null,
-  success: null as string | null,
+  error: '',
+  success: '',
 };
 
 export default function CreateClassForm() {

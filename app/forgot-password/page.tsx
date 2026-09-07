@@ -4,8 +4,8 @@ import { forgotPassword } from '@/app/actions/auth';
 import Link from 'next/link';
 
 const initialState = {
-  error: null as string | null,
-  success: null as string | null,
+  error: '',
+  success: '',
 };
 
 export default function ForgotPasswordPage() {
