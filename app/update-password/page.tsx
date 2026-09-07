@@ -1,7 +1,5 @@
 'use client';
 
-export const dynamic = 'force-dynamic'; 
-export const revalidate = 0;
 
 import { useActionState } from 'react';
 import { updateNewPassword } from '@/app/actions/auth';
