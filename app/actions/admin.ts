@@ -36,11 +36,11 @@ export async function createClass(prevState: any, formData: FormData) {
   })
 
   if (error) {
-    return { error: error.message }
+    return { error: 'Pesan error Anda', success: '' };
   }
 
   revalidatePath('/admin/classes')
-  return { success: 'Kelas berhasil dibuat!' }
+  return { error: '', success: 'Kelas berhasil dibuat!' };
 }
 
 // Fungsi untuk menghapus kelas
