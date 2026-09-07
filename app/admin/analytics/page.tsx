@@ -2,7 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import ClassFilter from './ClassFilter';
-import ExportButton from './ExportButton'; // <-- Impor Komponen Ekspor
+import ExportButton from './ExportButton';
 
 export default async function AdminAnalyticsPage({
   searchParams,
@@ -64,25 +64,25 @@ export default async function AdminAnalyticsPage({
 
   const { data: allQuestions } = await questionsQuery;
 
-  // 5. Hitung Statistik Umum
+  // 5. Hitung Statistik Umum (Diamankan dengan Fallback Array Kosong)
   const resultsList = allResults || [];
   const totalExamSubmissions = resultsList.length;
   const averageScore = totalExamSubmissions > 0 
-    ? Math.round(allResults.reduce((acc, curr) => acc + (curr.score || 0), 0) / totalExamSubmissions) 
+    ? Math.round(resultsList.reduce((acc: number, curr: any) => acc + (curr.score || 0), 0) / totalExamSubmissions) 
     : 0;
 
-  const highestScore = totalExamSubmissions > 0 ? Math.max(...allResults.map(r => r.score || 0)) : 0;
+  const highestScore = totalExamSubmissions > 0 ? Math.max(...resultsList.map((r: any) => r.score || 0)) : 0;
 
   // 6. Analisis Tingkat Kesulitan Soal
   const questionStats: Record<string, { text: string; wrongCount: number; totalAnswered: number }> = {};
   
-  allQuestions?.forEach(q => {
+  allQuestions?.forEach((q: any) => {
     questionStats[q.id] = { text: q.question_text, wrongCount: 0, totalAnswered: 0 };
   });
 
-  allResults?.forEach(result => {
+  resultsList.forEach((result: any) => {
     const answers = (result.student_answers as Record<string, string>) || {};
-    allQuestions?.forEach(q => {
+    allQuestions?.forEach((q: any) => {
       if (answers[q.id] !== undefined && questionStats[q.id]) {
         questionStats[q.id].totalAnswered++;
         if (answers[q.id] !== q.correct_answer) {
@@ -121,7 +121,7 @@ export default async function AdminAnalyticsPage({
           {/* Filter Kelas & Tombol Ekspor */}
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
             <ClassFilter classesList={classesList || []} currentClassId={classId} />
-            <ExportButton data={allResults || []} />
+            <ExportButton data={resultsList} />
           </div>
         </div>
 
@@ -185,14 +185,14 @@ export default async function AdminAnalyticsPage({
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-700">
-                {allResults?.length === 0 ? (
+                {resultsList.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="p-8 text-center text-slate-400">
                       Belum ada data hasil ujian untuk filter kelas ini.
                     </td>
                   </tr>
                 ) : (
-                  allResults?.map((res: any, idx: number) => {
+                  resultsList.map((res: any, idx: number) => {
                     const profileData = res.profiles;
                     const classData = res.classes;
                     return (
