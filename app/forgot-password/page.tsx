@@ -1,6 +1,7 @@
+'use client';
 export const dynamic = 'force-dynamic'; 
 export const revalidate = 0;
-'use client';
+
 import { useActionState } from 'react';
 import { forgotPassword } from '@/app/actions/auth';
 import Link from 'next/link';
