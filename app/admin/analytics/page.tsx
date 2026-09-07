@@ -65,7 +65,8 @@ export default async function AdminAnalyticsPage({
   const { data: allQuestions } = await questionsQuery;
 
   // 5. Hitung Statistik Umum
-  const totalExamSubmissions = allResults?.length || 0;
+  const resultsList = allResults || [];
+  const totalExamSubmissions = resultsList.length;
   const averageScore = totalExamSubmissions > 0 
     ? Math.round(allResults.reduce((acc, curr) => acc + (curr.score || 0), 0) / totalExamSubmissions) 
     : 0;
